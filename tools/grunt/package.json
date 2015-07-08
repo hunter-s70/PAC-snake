@@ -1,0 +1,23 @@
+{
+  "name": "PAC_snake",
+  "version": "0.1.0",
+  "description": "It is game",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LEHA314/PAC_snake.git"
+  },
+  "keywords": [
+    "Game",
+    "PAC_shake"
+  ],
+  "author": "Aleksei Odnoiko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LEHA314/PAC_snake/issues"
+  },
+  "homepage": "https://github.com/LEHA314/PAC_snake"
+}
