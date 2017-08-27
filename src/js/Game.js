@@ -74,6 +74,17 @@ var Game = {
         requestAnimationFrame(Game.loop);
     },
 
+    createStaticBall: function() {
+        var ball = new BallStatic(
+            Game.random(0, Game.playArea.width),
+            Game.random(0, Game.playArea.height),
+            'rgb(' + Game.random(0,255) + ',' + Game.random(0,255) + ',' + Game.random(0,255) +')',
+            Game.random(10, 30)
+        );
+
+        ball.draw(Game.ctx);
+    },
+
     resetGame: function() {
         Game.balls = [];
         Game.snakeBallCount = 1;

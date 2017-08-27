@@ -1,18 +1,12 @@
 function Ball(x, y, velX, velY, color, size) {
-    this.x = x;
-    this.y = y;
+    BallStatic.call(this, x, y, color, size);
     this.velX = velX;
     this.velY = velY;
-    this.color = color;
-    this.size = size;
 }
 
-Ball.prototype.draw = function(ctx) {
-    ctx.beginPath();
-    ctx.fillStyle = this.color;
-    ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-    ctx.fill();
-};
+Ball.prototype = Object.create(BallStatic.prototype);
+
+Ball.prototype.constructor = Ball;
 
 Ball.prototype.update = function(playArea) {
     if ((this.x + this.size) >= playArea.width || (this.x - this.size) <= 0 ||
