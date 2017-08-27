@@ -15,22 +15,12 @@ Ball.prototype.draw = function(ctx) {
 };
 
 Ball.prototype.update = function(playArea) {
-    if ((this.x + this.size) >= playArea.width) {
-        this.velX = -(this.velX);
-    }
-
-    if ((this.x - this.size) <= 0) {
-        this.velX = -(this.velX);
-    }
-
-    if ((this.y + this.size) >= playArea.height) {
-        this.velY = -(this.velY);
-    }
-
-    if ((this.y - this.size) <= 0) {
-        this.velY = -(this.velY);
+    if ((this.x + this.size) >= playArea.width || (this.x - this.size) <= 0 ||
+        (this.y + this.size) >= playArea.height || (this.y - this.size) <= 0 ) {
+        return false;
     }
 
     this.x += this.velX;
     this.y += this.velY;
+    return true;
 };
