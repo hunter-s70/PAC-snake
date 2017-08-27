@@ -22,26 +22,28 @@ var Game = {
     },
 
     joystick: function(event) {
+        var snakeHead = Game.balls[0];
+
         switch (event.keyCode) {
             //up
             case 38:
-                Game.balls[0].velX = Game.snakeNoSpeed;
-                Game.balls[0].velY = -Game.snakeSpeed;
+                snakeHead.velX = Game.snakeNoSpeed;
+                snakeHead.velY = -Game.snakeSpeed;
                 break;
             //down
             case 40:
-                Game.balls[0].velX = Game.snakeNoSpeed;
-                Game.balls[0].velY = Game.snakeSpeed;
+                snakeHead.velX = Game.snakeNoSpeed;
+                snakeHead.velY = Game.snakeSpeed;
                 break;
             //left
             case 37:
-                Game.balls[0].velX = -Game.snakeSpeed;
-                Game.balls[0].velY = Game.snakeNoSpeed;
+                snakeHead.velX = -Game.snakeSpeed;
+                snakeHead.velY = Game.snakeNoSpeed;
                 break;
             //right
             case 39:
-                Game.balls[0].velX = Game.snakeSpeed;
-                Game.balls[0].velY = Game.snakeNoSpeed;
+                snakeHead.velX = Game.snakeSpeed;
+                snakeHead.velY = Game.snakeNoSpeed;
                 break;
         }
     },
