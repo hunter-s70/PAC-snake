@@ -1,16 +1,69 @@
-var canvas = document.querySelector('#canvas');
-var ctx = canvas.getContext('2d');
+var Game = {
+    canvas: document.querySelector('#canvas'),
+    ctx: canvas.getContext('2d'),
 
-var width = canvas.width = window.innerWidth;
-var height = canvas.height = window.innerHeight;
+    playArea: {
+        width: canvas.width = window.innerWidth,
+        height: canvas.height = window.innerHeight
+    },
 
-var balls = [];
-var snakeSize = 1;
-var standartSpeed = 3;
+    balls: [],
+    snakeSize: 1,
+    snakeSpeed: 3,
 
-function random(min,max) {
-    return Math.floor(Math.random()*(max-min)) + min;
-}
+    random: function(min,max) {
+        return Math.floor(Math.random()*(max-min)) + min;
+    },
+
+    joystick: function(event) {
+        switch (event.keyCode) {
+            //up
+            case 38:
+                Game.balls[0].velX = 0;
+                Game.balls[0].velY = -Game.snakeSpeed;
+                break;
+            //down
+            case 40:
+                Game.balls[0].velX = 0;
+                Game.balls[0].velY = Game.snakeSpeed;
+                break;
+            //left
+            case 37:
+                Game.balls[0].velX = -Game.snakeSpeed;
+                Game.balls[0].velY = 0;
+                break;
+            //right
+            case 39:
+                Game.balls[0].velX = Game.snakeSpeed;
+                Game.balls[0].velY = 0;
+                break;
+        }
+    },
+
+    loop: function() {
+        Game.ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+        Game.ctx.fillRect(0, 0, Game.playArea.width, Game.playArea.height);
+
+        while (Game.balls.length < Game.snakeSize) {
+            var ball = new Ball(
+                20,
+                20,
+                Game.snakeSpeed,
+                0,
+                'rgb(' + Game.random(0,255) + ',' + Game.random(0,255) + ',' + Game.random(0,255) +')',
+                15
+            );
+            Game.balls.push(ball);
+        }
+
+        for (var i = 0; i < Game.balls.length; i++) {
+            Game.balls[i].draw(Game.ctx);
+            Game.balls[i].update(Game.playArea);
+        }
+
+        requestAnimationFrame(Game.loop);
+    }
+};
 
 function Ball(x, y, velX, velY, color, size) {
     this.x = x;
@@ -21,15 +74,15 @@ function Ball(x, y, velX, velY, color, size) {
     this.size = size;
 }
 
-Ball.prototype.draw = function() {
+Ball.prototype.draw = function(ctx) {
     ctx.beginPath();
     ctx.fillStyle = this.color;
     ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
     ctx.fill();
 };
 
-Ball.prototype.update = function() {
-    if ((this.x + this.size) >= width) {
+Ball.prototype.update = function(playArea) {
+    if ((this.x + this.size) >= playArea.width) {
         this.velX = -(this.velX);
     }
 
@@ -37,7 +90,7 @@ Ball.prototype.update = function() {
         this.velX = -(this.velX);
     }
 
-    if ((this.y + this.size) >= height) {
+    if ((this.y + this.size) >= playArea.height) {
         this.velY = -(this.velY);
     }
 
@@ -49,55 +102,6 @@ Ball.prototype.update = function() {
     this.y += this.velY;
 };
 
-function joystick(event) {
-    switch (event.keyCode) {
-        //up
-        case 38:
-            balls[0].velX = 0;
-            balls[0].velY = -standartSpeed;
-            break;
-        //down
-        case 40:
-            balls[0].velX = 0;
-            balls[0].velY = standartSpeed;
-            break;
-        //left
-        case 37:
-            balls[0].velX = -standartSpeed;
-            balls[0].velY = 0;
-            break;
-        //right
-        case 39:
-            balls[0].velX = standartSpeed;
-            balls[0].velY = 0;
-            break;
-    }
-}
+Game.loop();
 
-function loop() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
-    ctx.fillRect(0, 0, width, height);
-
-    while (balls.length < snakeSize) {
-        var ball = new Ball(
-            20,
-            20,
-            standartSpeed,
-            0,
-            'rgb(' + random(0,255) + ',' + random(0,255) + ',' + random(0,255) +')',
-            15
-        );
-        balls.push(ball);
-    }
-
-    for (var i = 0; i < balls.length; i++) {
-        balls[i].draw();
-        balls[i].update();
-    }
-
-    requestAnimationFrame(loop);
-}
-
-loop();
-
-window.addEventListener('keydown', joystick, false);
+window.addEventListener('keydown', Game.joystick, false);
