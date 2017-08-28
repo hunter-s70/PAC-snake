@@ -8,6 +8,7 @@ var Game = {
     },
 
     balls: [],
+    staticBalls: [],
 
     snakeColor: 'rgb(1, 223, 1)',
     snakeBallCount: 1,
@@ -71,18 +72,24 @@ var Game = {
             }
         }
 
+        Game.createStaticBall();
+
         requestAnimationFrame(Game.loop);
     },
 
     createStaticBall: function() {
-        var ball = new BallStatic(
-            Game.random(0, Game.playArea.width),
-            Game.random(0, Game.playArea.height),
-            'rgb(' + Game.random(0,255) + ',' + Game.random(0,255) + ',' + Game.random(0,255) +')',
-            Game.random(10, 30)
-        );
+        if (!Game.staticBalls.length) {
+            var ball = new BallStatic(
+                Game.random(0, Game.playArea.width),
+                Game.random(0, Game.playArea.height),
+                'rgb(' + Game.random(0,255) + ',' + Game.random(0,255) + ',' + Game.random(0,255) +')',
+                Game.random(10, 30)
+            );
 
-        ball.draw(Game.ctx);
+            Game.staticBalls.push(ball);
+        }
+
+        Game.staticBalls[0].draw(Game.ctx);
     },
 
     resetGame: function() {
