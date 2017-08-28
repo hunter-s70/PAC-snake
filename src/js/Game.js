@@ -67,6 +67,7 @@ var Game = {
 
         for (var i = 0; i < Game.balls.length; i++) {
             Game.balls[i].draw(Game.ctx);
+            Game.balls[i].collisionDetect(Game.staticBalls);
             if (!Game.balls[i].update(Game.playArea)) {
                 Game.resetGame();
             }
@@ -83,7 +84,7 @@ var Game = {
                 Game.random(0, Game.playArea.width),
                 Game.random(0, Game.playArea.height),
                 'rgb(' + Game.random(0,255) + ',' + Game.random(0,255) + ',' + Game.random(0,255) +')',
-                Game.random(10, 30)
+                Game.ballSize
             );
 
             Game.staticBalls.push(ball);
