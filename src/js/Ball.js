@@ -27,8 +27,9 @@ Ball.prototype.collisionDetect = function(balls) {
             var distance = Math.sqrt(dx * dx + dy * dy);
 
             if (distance < this.size + balls[j].size) {
-                Game.staticBalls = [];
+                return false;
             }
         }
     }
+    return true;
 };

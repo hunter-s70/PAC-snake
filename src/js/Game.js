@@ -49,7 +49,7 @@ var Game = {
         }
     },
 
-    loop: function() {
+    render: function() {
         Game.ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
         Game.ctx.fillRect(0, 0, Game.playArea.width, Game.playArea.height);
 
@@ -66,16 +66,21 @@ var Game = {
         }
 
         for (var i = 0; i < Game.balls.length; i++) {
-            Game.balls[i].draw(Game.ctx);
-            Game.balls[i].collisionDetect(Game.staticBalls);
-            if (!Game.balls[i].update(Game.playArea)) {
+            var currentBall = Game.balls[i];
+            
+            currentBall.draw(Game.ctx);
+            
+            if (!currentBall.collisionDetect(Game.staticBalls)) {
+                Game.staticBalls = [];
+            }
+            if (!currentBall.update(Game.playArea)) {
                 Game.resetGame();
             }
         }
 
         Game.createStaticBall();
 
-        requestAnimationFrame(Game.loop);
+        requestAnimationFrame(Game.render);
     },
 
     createStaticBall: function() {
@@ -86,7 +91,6 @@ var Game = {
                 'rgb(' + Game.random(0,255) + ',' + Game.random(0,255) + ',' + Game.random(0,255) +')',
                 Game.ballSize
             );
-
             Game.staticBalls.push(ball);
         }
 
@@ -99,6 +103,6 @@ var Game = {
     }
 };
 
-Game.loop();
+Game.render();
 
 window.addEventListener('keydown', Game.joystick, false);
