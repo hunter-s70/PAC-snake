@@ -17,6 +17,7 @@ var Game = {
     startPosX: 20,
     startPosY: 20,
     ballSize: 15,
+    state: null,
 
     random: function(min,max) {
         return Math.floor(Math.random()*(max-min)) + min;
@@ -49,29 +50,60 @@ var Game = {
         }
     },
 
+    chainCreator: function(index) {
+        return new Ball(
+            Game.balls[index].x - 30,
+            Game.balls[index].y,
+            Game.balls[index].velX,
+            Game.balls[index].velY,
+            Game.snakeColor,
+            Game.ballSize
+        );
+    },
+
+    setBuffer: function(state) {
+        this.state = state;
+    },
+
+    getBuffer: function() {
+        return this.state;
+    },
+
     render: function() {
         Game.ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
         Game.ctx.fillRect(0, 0, Game.playArea.width, Game.playArea.height);
 
         while (Game.balls.length < Game.snakeBallCount) {
-            var ball = new Ball(
-                Game.startPosX,
-                Game.startPosY,
-                Game.snakeSpeed,
-                Game.snakeNoSpeed,
-                Game.snakeColor,
-                Game.ballSize
-            );
+            var ball;
+            if (!Game.balls.length) {
+                ball = new Ball(
+                    Game.startPosX,
+                    Game.startPosY,
+                    Game.snakeSpeed,
+                    Game.snakeNoSpeed,
+                    Game.snakeColor,
+                    Game.ballSize
+                );
+            } else {
+                ball = Game.chainCreator(Game.balls.length - 1);
+            }
             Game.balls.push(ball);
         }
 
         for (var i = 0; i < Game.balls.length; i++) {
-            var currentBall = Game.balls[i];
-            
+            var currentBall = Game.balls[i],
+                prevState = Game.getBuffer();
+
+            Game.setBuffer(currentBall);
+            if (i !== 0) {
+                Game.balls[i].velX = prevState.velX;
+                Game.balls[i].velY = prevState.velY;
+            }
             currentBall.draw(Game.ctx);
             
             if (!currentBall.collisionDetect(Game.staticBalls)) {
                 Game.staticBalls = [];
+                Game.snakeBallCount++;
             }
             if (!currentBall.update(Game.playArea)) {
                 Game.resetGame();
