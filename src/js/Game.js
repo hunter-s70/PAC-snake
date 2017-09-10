@@ -95,18 +95,24 @@ var Game = {
                 prevState = Game.getBuffer();
 
             Game.setBuffer(currentBall);
-            if (i !== 0) {
-                Game.balls[i].velX = prevState.velX;
-                Game.balls[i].velY = prevState.velY;
-            }
             currentBall.draw(Game.ctx);
             
             if (!currentBall.collisionDetect(Game.staticBalls)) {
                 Game.staticBalls = [];
                 Game.snakeBallCount++;
             }
-            if (!currentBall.update(Game.playArea)) {
+            if (i === 0 && !Game.balls[0].update(Game.playArea)) {
                 Game.resetGame();
+            }
+            if (i !== 0) {
+                Game.balls[i] = new Ball(
+                    prevState.x,
+                    prevState.y,
+                    prevState.velX,
+                    prevState.velY,
+                    Game.snakeColor,
+                    Game.ballSize
+                );
             }
         }
 
