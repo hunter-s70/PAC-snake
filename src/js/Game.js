@@ -27,27 +27,96 @@ var Game = {
     joystick: function(event) {
         var snakeHead = Game.balls[0];
 
-        switch (event.keyCode) {
-            //up
-            case 38:
-                snakeHead.velX = Game.snakeNoSpeed;
-                snakeHead.velY = -Game.snakeSpeed;
-                break;
-            //down
-            case 40:
-                snakeHead.velX = Game.snakeNoSpeed;
-                snakeHead.velY = Game.snakeSpeed;
-                break;
-            //left
-            case 37:
-                snakeHead.velX = -Game.snakeSpeed;
-                snakeHead.velY = Game.snakeNoSpeed;
-                break;
-            //right
-            case 39:
-                snakeHead.velX = Game.snakeSpeed;
-                snakeHead.velY = Game.snakeNoSpeed;
-                break;
+        if (snakeHead.velX > 0) {
+            switch (event.keyCode) {
+                //up
+                case 38:
+                    console.log('up');
+                    snakeHead.velX = Game.snakeNoSpeed;
+                    snakeHead.velY = -Game.snakeSpeed;
+                    break;
+                //down
+                case 40:
+                    console.log('down');
+                    snakeHead.velX = Game.snakeNoSpeed;
+                    snakeHead.velY = Game.snakeSpeed;
+                    break;
+                //right
+                case 39:
+                    console.log('right');
+                    snakeHead.velX = Game.snakeSpeed;
+                    snakeHead.velY = Game.snakeNoSpeed;
+                    break;
+            }
+        }
+
+        if (snakeHead.velX < 0) {
+            switch (event.keyCode) {
+                //up
+                case 38:
+                    console.log('up');
+                    snakeHead.velX = Game.snakeNoSpeed;
+                    snakeHead.velY = -Game.snakeSpeed;
+                    break;
+                //down
+                case 40:
+                    console.log('down');
+                    snakeHead.velX = Game.snakeNoSpeed;
+                    snakeHead.velY = Game.snakeSpeed;
+                    break;
+                //left
+                case 37:
+                    console.log('left');
+                    snakeHead.velX = -Game.snakeSpeed;
+                    snakeHead.velY = Game.snakeNoSpeed;
+                    break;
+            }
+        }
+
+        if (snakeHead.velY > 0) {
+            switch (event.keyCode) {
+                //down
+                case 40:
+                    console.log('down');
+                    snakeHead.velX = Game.snakeNoSpeed;
+                    snakeHead.velY = Game.snakeSpeed;
+                    break;
+                //left
+                case 37:
+                    console.log('left');
+                    snakeHead.velX = -Game.snakeSpeed;
+                    snakeHead.velY = Game.snakeNoSpeed;
+                    break;
+                //right
+                case 39:
+                    console.log('right');
+                    snakeHead.velX = Game.snakeSpeed;
+                    snakeHead.velY = Game.snakeNoSpeed;
+                    break;
+            }
+        }
+
+        if (snakeHead.velY < 0) {
+            switch (event.keyCode) {
+                //up
+                case 38:
+                    console.log('up');
+                    snakeHead.velX = Game.snakeNoSpeed;
+                    snakeHead.velY = -Game.snakeSpeed;
+                    break;
+                //left
+                case 37:
+                    console.log('left');
+                    snakeHead.velX = -Game.snakeSpeed;
+                    snakeHead.velY = Game.snakeNoSpeed;
+                    break;
+                //right
+                case 39:
+                    console.log('right');
+                    snakeHead.velX = Game.snakeSpeed;
+                    snakeHead.velY = Game.snakeNoSpeed;
+                    break;
+            }
         }
     },
 
