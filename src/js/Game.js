@@ -31,19 +31,16 @@ var Game = {
             switch (event.keyCode) {
                 //up
                 case 38:
-                    console.log('up');
                     snakeHead.velX = Game.snakeNoSpeed;
                     snakeHead.velY = -Game.snakeSpeed;
                     break;
                 //down
                 case 40:
-                    console.log('down');
                     snakeHead.velX = Game.snakeNoSpeed;
                     snakeHead.velY = Game.snakeSpeed;
                     break;
                 //right
                 case 39:
-                    console.log('right');
                     snakeHead.velX = Game.snakeSpeed;
                     snakeHead.velY = Game.snakeNoSpeed;
                     break;
@@ -54,19 +51,16 @@ var Game = {
             switch (event.keyCode) {
                 //up
                 case 38:
-                    console.log('up');
                     snakeHead.velX = Game.snakeNoSpeed;
                     snakeHead.velY = -Game.snakeSpeed;
                     break;
                 //down
                 case 40:
-                    console.log('down');
                     snakeHead.velX = Game.snakeNoSpeed;
                     snakeHead.velY = Game.snakeSpeed;
                     break;
                 //left
                 case 37:
-                    console.log('left');
                     snakeHead.velX = -Game.snakeSpeed;
                     snakeHead.velY = Game.snakeNoSpeed;
                     break;
@@ -77,19 +71,16 @@ var Game = {
             switch (event.keyCode) {
                 //down
                 case 40:
-                    console.log('down');
                     snakeHead.velX = Game.snakeNoSpeed;
                     snakeHead.velY = Game.snakeSpeed;
                     break;
                 //left
                 case 37:
-                    console.log('left');
                     snakeHead.velX = -Game.snakeSpeed;
                     snakeHead.velY = Game.snakeNoSpeed;
                     break;
                 //right
                 case 39:
-                    console.log('right');
                     snakeHead.velX = Game.snakeSpeed;
                     snakeHead.velY = Game.snakeNoSpeed;
                     break;
@@ -100,19 +91,16 @@ var Game = {
             switch (event.keyCode) {
                 //up
                 case 38:
-                    console.log('up');
                     snakeHead.velX = Game.snakeNoSpeed;
                     snakeHead.velY = -Game.snakeSpeed;
                     break;
                 //left
                 case 37:
-                    console.log('left');
                     snakeHead.velX = -Game.snakeSpeed;
                     snakeHead.velY = Game.snakeNoSpeed;
                     break;
                 //right
                 case 39:
-                    console.log('right');
                     snakeHead.velX = Game.snakeSpeed;
                     snakeHead.velY = Game.snakeNoSpeed;
                     break;
