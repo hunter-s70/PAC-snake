@@ -125,22 +125,22 @@ var Game = {
     },
 
     createStaticBall: function() {
-        if (!Game.staticBalls.length) {
+        if (!this.staticBalls.length) {
             var ball = new BallStatic(
-                Game.random(0, Game.playArea.width),
-                Game.random(0, Game.playArea.height),
-                'rgb(' + Game.random(0,255) + ',' + Game.random(0,255) + ',' + Game.random(0,255) +')',
-                Game.ballSize
+                this.random(0, this.playArea.width),
+                this.random(0, this.playArea.height),
+                'rgb(' + this.random(0,255) + ',' + this.random(0,255) + ',' + this.random(0,255) +')',
+                this.ballSize
             );
-            Game.staticBalls.push(ball);
+            this.staticBalls.push(ball);
         }
 
-        Game.staticBalls[0].draw(Game.ctx);
+        this.staticBalls[0].draw(this.ctx);
     },
 
     resetGame: function() {
-        Game.balls = [];
-        Game.snakeBallCount = 1;
+        this.balls = [];
+        this.snakeBallCount = 1;
     }
 };
 
