@@ -14,6 +14,7 @@ var Game = {
     snakeBallCount: 1,
     snakeSpeed: 3,
     snakeNoSpeed: 0,
+    speedLevelInterval: 0.5,
     startPosX: 20,
     startPosY: 20,
     ballSize: 15,
@@ -103,6 +104,7 @@ var Game = {
             if (!currentBall.collisionDetect(Game.staticBalls)) {
                 Game.staticBalls = [];
                 Game.snakeBallCount++;
+                Game.snakeSpeed += Game.speedLevelInterval;
             }
             if (i === 0 && !Game.balls[0].update(Game.playArea)) {
                 Game.resetGame();
@@ -141,6 +143,7 @@ var Game = {
     resetGame: function() {
         this.balls = [];
         this.snakeBallCount = 1;
+        this.snakeSpeed = 3;
     }
 };
 
