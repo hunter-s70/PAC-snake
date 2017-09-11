@@ -50,14 +50,17 @@ var Game = {
         }
     },
 
-    chainCreator: function(index) {
+    chainCreator: function() {
+        // snake head current position
+        var snakeHead = this.balls[0];
+
         return new Ball(
-            Game.balls[index].x - 30,
-            Game.balls[index].y,
-            Game.balls[index].velX,
-            Game.balls[index].velY,
-            Game.snakeColor,
-            Game.ballSize
+            snakeHead.x,
+            snakeHead.y,
+            snakeHead.velX,
+            snakeHead.velY,
+            snakeHead.snakeColor,
+            snakeHead.ballSize
         );
     },
 
@@ -85,7 +88,7 @@ var Game = {
                     Game.ballSize
                 );
             } else {
-                ball = Game.chainCreator(Game.balls.length - 1);
+                ball = Game.chainCreator();
             }
             Game.balls.push(ball);
         }
