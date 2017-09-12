@@ -28,83 +28,48 @@ var Game = {
         var snakeHead = Game.balls[0];
 
         if (snakeHead.velX > 0) {
-            switch (event.keyCode) {
-                //up
-                case 38:
-                    snakeHead.velX = Game.snakeNoSpeed;
-                    snakeHead.velY = -Game.snakeSpeed;
-                    break;
-                //down
-                case 40:
-                    snakeHead.velX = Game.snakeNoSpeed;
-                    snakeHead.velY = Game.snakeSpeed;
-                    break;
-                //right
-                case 39:
-                    snakeHead.velX = Game.snakeSpeed;
-                    snakeHead.velY = Game.snakeNoSpeed;
-                    break;
-            }
+            Game.delDirection(event, snakeHead, 'left');
         }
 
         if (snakeHead.velX < 0) {
-            switch (event.keyCode) {
-                //up
-                case 38:
-                    snakeHead.velX = Game.snakeNoSpeed;
-                    snakeHead.velY = -Game.snakeSpeed;
-                    break;
-                //down
-                case 40:
-                    snakeHead.velX = Game.snakeNoSpeed;
-                    snakeHead.velY = Game.snakeSpeed;
-                    break;
-                //left
-                case 37:
-                    snakeHead.velX = -Game.snakeSpeed;
-                    snakeHead.velY = Game.snakeNoSpeed;
-                    break;
-            }
+            Game.delDirection(event, snakeHead, 'right');
         }
 
         if (snakeHead.velY > 0) {
-            switch (event.keyCode) {
-                //down
-                case 40:
-                    snakeHead.velX = Game.snakeNoSpeed;
-                    snakeHead.velY = Game.snakeSpeed;
-                    break;
-                //left
-                case 37:
-                    snakeHead.velX = -Game.snakeSpeed;
-                    snakeHead.velY = Game.snakeNoSpeed;
-                    break;
-                //right
-                case 39:
-                    snakeHead.velX = Game.snakeSpeed;
-                    snakeHead.velY = Game.snakeNoSpeed;
-                    break;
-            }
+            Game.delDirection(event, snakeHead, 'up');
         }
 
         if (snakeHead.velY < 0) {
-            switch (event.keyCode) {
-                //up
-                case 38:
-                    snakeHead.velX = Game.snakeNoSpeed;
-                    snakeHead.velY = -Game.snakeSpeed;
-                    break;
-                //left
-                case 37:
-                    snakeHead.velX = -Game.snakeSpeed;
-                    snakeHead.velY = Game.snakeNoSpeed;
-                    break;
-                //right
-                case 39:
-                    snakeHead.velX = Game.snakeSpeed;
-                    snakeHead.velY = Game.snakeNoSpeed;
-                    break;
-            }
+            Game.delDirection(event, snakeHead, 'down');
+        }
+    },
+
+    delDirection: function(event, snakeHead, deleted) {
+        switch (event.keyCode) {
+            //up
+            case 38:
+                if (deleted === 'up') return;
+                snakeHead.velX = Game.snakeNoSpeed;
+                snakeHead.velY = -Game.snakeSpeed;
+                break;
+            //down
+            case 40:
+                if (deleted === 'down') return;
+                snakeHead.velX = Game.snakeNoSpeed;
+                snakeHead.velY = Game.snakeSpeed;
+                break;
+            //left
+            case 37:
+                if (deleted === 'left') return;
+                snakeHead.velX = -Game.snakeSpeed;
+                snakeHead.velY = Game.snakeNoSpeed;
+                break;
+            //right
+            case 39:
+                if (deleted === 'right') return;
+                snakeHead.velX = Game.snakeSpeed;
+                snakeHead.velY = Game.snakeNoSpeed;
+                break;
         }
     },
 
