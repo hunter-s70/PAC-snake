@@ -82,8 +82,8 @@ var Game = {
             snakeHead.y,
             snakeHead.velX,
             snakeHead.velY,
-            snakeHead.snakeColor,
-            snakeHead.ballSize
+            Game.snakeColor,
+            Game.ballSize
         );
     },
 
