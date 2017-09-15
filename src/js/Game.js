@@ -87,6 +87,20 @@ var Game = {
         );
     },
 
+    createStaticBall: function() {
+        if (!this.staticBalls.length) {
+            var ball = new BallStatic(
+                this.random(0, this.playArea.width),
+                this.random(0, this.playArea.height),
+                'rgb(' + this.random(0,255) + ',' + this.random(0,255) + ',' + this.random(0,255) +')',
+                this.ballSize
+            );
+            this.staticBalls.push(ball);
+        }
+
+        this.staticBalls[0].draw(this.ctx);
+    },
+
     setBuffer: function(state) {
         this.state = state;
     },
@@ -143,20 +157,6 @@ var Game = {
         this.staticBalls = [];
         this.snakeBallCount++;
         this.snakeSpeed += this.speedLevelInterval;
-    },
-
-    createStaticBall: function() {
-        if (!this.staticBalls.length) {
-            var ball = new BallStatic(
-                this.random(0, this.playArea.width),
-                this.random(0, this.playArea.height),
-                'rgb(' + this.random(0,255) + ',' + this.random(0,255) + ',' + this.random(0,255) +')',
-                this.ballSize
-            );
-            this.staticBalls.push(ball);
-        }
-
-        this.staticBalls[0].draw(this.ctx);
     },
 
     resetGame: function() {
