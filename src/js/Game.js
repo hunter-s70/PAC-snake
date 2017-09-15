@@ -123,10 +123,8 @@ var Game = {
             Game.setBuffer(currentBall);
             currentBall.draw(Game.ctx);
             
-            if (!currentBall.collisionDetect(Game.staticBalls)) {
-                Game.staticBalls = [];
-                Game.snakeBallCount++;
-                Game.snakeSpeed += Game.speedLevelInterval;
+            if (currentBall.collisionDetect(Game.staticBalls)) {
+                Game.levelUp();
             }
             if (i === 0 && !Game.balls[0].update(Game.playArea)) {
                 Game.resetGame();
@@ -139,6 +137,12 @@ var Game = {
         Game.createStaticBall();
 
         requestAnimationFrame(Game.render);
+    },
+
+    levelUp: function() {
+        this.staticBalls = [];
+        this.snakeBallCount++;
+        this.snakeSpeed += this.speedLevelInterval;
     },
 
     createStaticBall: function() {
