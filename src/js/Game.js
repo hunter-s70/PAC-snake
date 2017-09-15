@@ -20,6 +20,9 @@ var Game = {
     ballSize: 15,
     state: null,
 
+    bestResults: 0,
+    score: function() {return this.snakeBallCount - 1},
+
     random: function(min,max) {
         return Math.floor(Math.random()*(max-min)) + min;
     },
@@ -112,7 +115,7 @@ var Game = {
     render: function() {
         Game.ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
         Game.ctx.fillRect(0, 0, Game.playArea.width, Game.playArea.height);
-        Game.addScore(Game.snakeBallCount);
+        Game.addScore(Game.score());
 
         while (Game.balls.length < Game.snakeBallCount) {
             var ball;
@@ -154,27 +157,32 @@ var Game = {
         requestAnimationFrame(Game.render);
     },
 
-    addScore: function(snakeBallCount) {
+    addScore: function(score) {
         var gameScore = document.querySelector('.game-score'),
-            snakeBallCount = snakeBallCount - 1;
+            scoreTable =
+                '<div><span class="score-label">Score: </span>' + score +'</div>' +
+                '<div><span class="score-label">Best : </span>' + this.bestResults + '</div>';
 
         if (!gameScore) {
-            var element = document.createElement('div'),
+            var wrapper = document.createElement('div'),
                 body = document.querySelector('body');
 
-            element.className = 'game-score';
-            element.innerHTML = snakeBallCount;
-            body.appendChild(element);
+            wrapper.className = 'game-score';
+            wrapper.innerHTML = scoreTable;
+            body.appendChild(wrapper);
             return;
         }
 
-        gameScore.innerHTML = snakeBallCount;
+        gameScore.innerHTML = scoreTable;
     },
 
     levelUp: function() {
         this.staticBalls = [];
         this.snakeBallCount++;
         this.snakeSpeed += this.speedLevelInterval;
+
+        var score = this.score();
+        this.bestResults = (this.bestResults < score) ? score : this.bestResults;
     },
 
     resetGame: function() {
