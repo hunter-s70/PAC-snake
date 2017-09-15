@@ -73,9 +73,9 @@ var Game = {
         }
     },
 
-    chainCreator: function() {
+    chainCreator: function(ballExample) {
         // snake head current position
-        var snakeHead = this.balls[0];
+        var snakeHead = ballExample || this.balls[0];
 
         return new Ball(
             snakeHead.x,
@@ -132,14 +132,7 @@ var Game = {
                 Game.resetGame();
             }
             if (i !== 0) {
-                Game.balls[i] = new Ball(
-                    prevState.x,
-                    prevState.y,
-                    prevState.velX,
-                    prevState.velY,
-                    Game.snakeColor,
-                    Game.ballSize
-                );
+                Game.balls[i] = Game.chainCreator(prevState);
             }
         }
 
