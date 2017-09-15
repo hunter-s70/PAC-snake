@@ -112,6 +112,7 @@ var Game = {
     render: function() {
         Game.ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
         Game.ctx.fillRect(0, 0, Game.playArea.width, Game.playArea.height);
+        Game.addScore(Game.snakeBallCount);
 
         while (Game.balls.length < Game.snakeBallCount) {
             var ball;
@@ -151,6 +152,23 @@ var Game = {
         Game.createStaticBall();
 
         requestAnimationFrame(Game.render);
+    },
+
+    addScore: function(snakeBallCount) {
+        var gameScore = document.querySelector('.game-score'),
+            snakeBallCount = snakeBallCount - 1;
+
+        if (!gameScore) {
+            var element = document.createElement('div'),
+                body = document.querySelector('body');
+
+            element.className = 'game-score';
+            element.innerHTML = snakeBallCount;
+            body.appendChild(element);
+            return;
+        }
+
+        gameScore.innerHTML = snakeBallCount;
     },
 
     levelUp: function() {
