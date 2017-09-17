@@ -1,3 +1,5 @@
 # PAC_snake
-snake-game on canvas
- Demo on pac-snake.github.io
+snake-game on canvas. 
+Рractice in js OOP
+
+Demo on https://pac-snake.herokuapp.com
