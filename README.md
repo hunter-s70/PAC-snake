@@ -1,2 +1,3 @@
 # PAC_snake
-game on canvas
+snake-game on canvas
+ Demo on pac-snake.github.io
