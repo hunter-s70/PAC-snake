@@ -80,14 +80,25 @@ var Game = {
         // snake head current position
         var snakeHead = ballExample || this.balls[0];
 
-        return new Ball(
-            snakeHead.x,
-            snakeHead.y,
-            snakeHead.velX,
-            snakeHead.velY,
-            Game.snakeColor,
-            Game.ballSize
-        );
+        if (!Game.balls.length) {
+            return new Ball(
+                this.startPosX,
+                this.startPosY,
+                this.snakeSpeed,
+                this.snakeNoSpeed,
+                this.snakeColor,
+                this.ballSize
+            );
+        } else {
+            return new Ball(
+                snakeHead.x,
+                snakeHead.y,
+                snakeHead.velX,
+                snakeHead.velY,
+                Game.snakeColor,
+                Game.ballSize
+            );
+        }
     },
 
     createStaticBall: function() {
@@ -118,20 +129,7 @@ var Game = {
         Game.addScore(Game.score());
 
         while (Game.balls.length < Game.snakeBallCount) {
-            var ball;
-            if (!Game.balls.length) {
-                ball = new Ball(
-                    Game.startPosX,
-                    Game.startPosY,
-                    Game.snakeSpeed,
-                    Game.snakeNoSpeed,
-                    Game.snakeColor,
-                    Game.ballSize
-                );
-            } else {
-                ball = Game.chainCreator();
-            }
-            Game.balls.push(ball);
+            Game.balls.push(Game.chainCreator());
         }
 
         for (var i = 0; i < Game.balls.length; i++) {
