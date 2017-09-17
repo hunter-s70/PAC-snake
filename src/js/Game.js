@@ -160,8 +160,8 @@ var Game = {
     addScore: function(score) {
         var gameScore = document.querySelector('.game-score'),
             scoreTable =
-                '<div><span class="score-label">Score: </span>' + score +'</div>' +
-                '<div><span class="score-label">Best : </span>' + this.bestResults + '</div>';
+                `<div><span class="score-label">Score: </span>${score}</div>
+                 <div><span class="score-label">Best : </span>${this.bestResults}</div>`;
 
         if (!gameScore) {
             var wrapper = document.createElement('div'),
